@@ -1,0 +1,17 @@
+%html{:lang => "en"}
+  %head
+    %title
+      Popup
+    %meta{:charset => "utf-8"}
+    %link{:rel => "stylesheet", :type => "text/css", :href => "popup.css"}
+    %script{:type => "text/javascript", :src  => "../lib/jquery.min.js"}
+    %script{:type => "text/javascript", :src  => "../lib/jsdeferred.js"}
+    %script{:type => "text/javascript", :src  => "../lib/jsdeferred.jquery.js"}
+    %script{:type => "text/javascript", :src  => "../lib/md5.js"}
+    %script{:type => "text/javascript", :src  => "popup.js"}
+  %body
+    %ul#comment-list
+      %li
+        #comment-message
+          %img#comment-loading-icon{:src => "/images/loading.gif"}
+          Loading comments...

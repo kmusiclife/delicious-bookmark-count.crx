@@ -1,0 +1,270 @@
+* {
+  margin: 0;
+  padding: 0;
+  font: 100%/1.4 "Arial", "Helvetica", sans-serif;
+  font-size: small;
+}
+
+#main {
+}
+
+body {
+  width: 250px;
+  overflow-x: hidden;
+  color: #222;
+  min-height: 70px;
+}
+
+img {
+  vertical-align: middle;
+  border: none;
+}
+
+a {
+  &:link,
+  &:hover,
+  &:visited {
+    color: #000080;
+  }
+  #users-count:link,
+  #users-count:hover,
+  #users-count:visited {
+    font-size: 90%;
+    color: #E9637A;
+    padding: 0px 3px 0px 3px;
+    font-weight: bold;
+  }
+}
+
+#favicon,
+.usericon,
+#usericon {
+  vertical-align:text-bottom;
+  margin:0 2px 0 0;
+}
+
+#comment-title-container {
+  background: no-repeat 0px 2px;
+  padding-left: 22px;
+  display: table-cell;
+  //display: inline-block;
+}
+
+#comment-infos {
+  display: none;
+  padding-bottom: 3px;
+}
+
+#star-loading-icon {
+  margin-left: -3px;
+  display: none;
+}
+
+#comment-container {
+  padding: 0;
+  background: #fff;
+}
+
+#comment-header {
+  //background: #fff;
+  //-webkit-box-shadow: 0px 1px 2px rgba(0,0,0,0.2);
+  display: table;
+  width: 100%;
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  padding: 3px 10px 3px 10px;
+}
+
+#comment-title {
+  font-size: 100%;
+}
+
+#comment-list {
+  padding: 5px 0;
+  li {
+    padding: 3px 20px 3px 10px;
+  }
+}
+
+span.timestamp {
+  font-size: 85%;
+  color: #999;
+  margin: 4px;
+}
+
+a.username {
+  margin-left: 4px;
+}
+
+#comment-message {
+  display: block;
+  margin: 30px;
+  color: #666;
+}
+
+#comment-loading-icon {
+  margin-right: 4px;
+}
+
+#comment-title-right {
+  display: table-cell;
+  width: 190px;
+  text-align: right;
+  //display: inline-block;
+  margin-top: 2px;
+}
+
+#image-detect-notice-user-container {
+  text-align: right;
+  font-size: 90%;
+}
+
+#image-detect-image-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  img {
+    #image-detect-image-container img {
+      cursor: pointer;
+      background: #fff;
+      -webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.2);
+      -webkit-border-bottom-left-radius: 4px;
+      padding: 2px;
+      border: 1px solid #eee;
+    }
+  }
+}
+
+
+#comment {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 3px 3px 3px 5px;
+    vertical-align: top;
+    resize: vertical;
+}
+
+#comment-area {
+    width: 100%;
+    position: relative;
+}
+
+#title {
+    font-weight: bold;
+}
+
+.none {
+    display: none;
+}
+
+#login-container,
+#bookmark-container,
+#comment-container,
+#search-container {
+  display: none;
+}
+
+#search-container,
+#comment-list {
+  max-height: 470px;
+  overflow-y: auto;
+  word-break:break-all;
+  li {
+    padding: 3px 3px 6px 3px;
+    border-bottom: 1px solid #F0F0F0;
+    margin: 3px;
+    font-size: 95%;
+    a.username {
+      padding: 0px 3px 0px 3px;
+    }
+    .comment {
+      color: #000;
+    }
+    .timestamp {
+      font-size: 90%;
+      color: #999;
+      padding-left: 5px;
+    }
+  }
+}
+
+#bookmark-message,
+#comment-message {
+  text-align: center;
+  padding: 20px 10px 20px 10px;
+}
+
+.hide-nocomment > li.nocomment {
+     display: none;
+}
+
+#comment-users {
+  /* 1, 2users */
+  background-color: #fdd;
+  color: red;
+  text-align: underline;
+  padding: 1px;
+}
+
+em #comment-users {
+  /* 3 users over */
+  font-weight: bold;
+}
+
+#comment-toggle {
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+
+/* loading */
+.loading {
+    display: none;
+}
+
+body.data-loading * .loaded {
+    display: none;
+}
+
+body.data-loading * .loading {
+    display: inline;
+}
+
+#comment-count-detail {
+  color: #555;
+  font-size: 90%;
+}
+
+/* USERS {{{ */
+em a:link,
+em a:hover,
+em a:visited,
+strong a:link,
+strong a:hover,
+strong a:visited {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  font-style: normal !important;
+  font-weight: bold !important;
+  text-decoration: underline !important;
+}
+
+strong a:link,
+strong a:hover,
+strong a:visited {
+  color: #ff0000 !important;
+  background: #FFCCCC !important;
+}
+
+em a:link,
+em a:hover,
+em a:visited {
+  color: #FF6666 !important;
+  background: #FFF0F0 !important;
+}
+
+/* }}} */
+
