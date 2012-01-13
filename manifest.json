@@ -3,12 +3,12 @@
    "background_page": "background/background.html",
    "description": "Show Delicious Comments",
    "browser_action": {
-      "default_icon": "icons/16.png",
+      "default_icon": "images/16.png",
       "popup": "background/popup.html"
    },
-   "icons": {
-      "16":  "icons/16.png",
-      "128": "icons/128.png"
+   "images": {
+      "16":  "images/16.png",
+      "128": "images/128.png"
    },
    "version": "0.1",
   "permissions": [
