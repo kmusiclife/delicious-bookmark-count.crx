@@ -29,13 +29,9 @@ get_bookmark_count = (url) ->
   .next (comments) -> comments?.total_posts || 0
 
 $ ->
-  Deferred.next ->
-    d = new Deferred
-    chrome.tabs.getSelected null, (tab) ->
-      d.call(tab.url)
-    d
-  .next (url) ->
-    get_recent(url)
+  Deferred.chrome.tabs.getSelected(null)
+  .next (tab) ->
+    get_recent(tab.url)
 
   .next (comments) ->
     html_comments =

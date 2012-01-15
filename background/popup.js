@@ -37,15 +37,8 @@ get_bookmark_count = function(url) {
   });
 };
 $(function() {
-  return Deferred.next(function() {
-    var d;
-    d = new Deferred;
-    chrome.tabs.getSelected(null, function(tab) {
-      return d.call(tab.url);
-    });
-    return d;
-  }).next(function(url) {
-    return get_recent(url);
+  return Deferred.chrome.tabs.getSelected(null).next(function(tab) {
+    return get_recent(tab.url);
   }).next(function(comments) {
     var html_comments;
     html_comments = comments.length === 0 ? 'No comments.' : comments.map(function(one) {
