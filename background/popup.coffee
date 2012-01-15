@@ -2,11 +2,11 @@ TRESHOLD_HIDE_NOCOMMENT = 15
 Deferred.debug = true
 c = (x) -> console.log x
 
-get_recent = (url) ->
+getRecent = (url) ->
   d = new Deferred
   $.get("http://feeds.delicious.com/v2/json/url/#{hex_md5 url}")
   .next (comments) ->
-    key_map =
+    keyMap =
       a:  'username'
       n:  'comment'
       t:  'tags'
@@ -15,8 +15,8 @@ get_recent = (url) ->
     fixed =
       comments.map (one) ->
         for key of one
-          if key_map.hasOwnProperty key
-            one[key_map[key]] = one[key] ? ""
+          if keyMap.hasOwnProperty key
+            one[keyMap[key]] = one[key] ? ""
           delete one[key]
         one
       .filter (one) ->
@@ -24,37 +24,38 @@ get_recent = (url) ->
     d.call fixed
   d
 
-get_bookmark_count = (url) ->
+getBookmarkCount = (url) ->
   $.get("http://feeds.delicious.com/v2/json/urlinfo/#{hex_md5 url}")
   .next (comments) -> comments?.total_posts || 0
 
 $ ->
   Deferred.chrome.tabs.getSelected(null)
   .next (tab) ->
-    get_recent(tab.url)
+    getRecent(tab.url)
 
   .next (comments) ->
-    html_comments =
+    htmlComments =
       if comments.length is 0
         'No comments.'
       else
         comments.map (one) ->
-          url_icon = do ->
-            username = if one.username.match /\./ then 'kawango' else one.username
+          urlIcon = do ->
+            username =
+              if one.username.match /\./ then 'kawango' else one.username
             "http://cdn0.www.st-hatena.com/users/#{username.substr(0, 2)}/#{username}/profile_s.gif"
 
-          html_line = """
+          htmlLine = """
             <li class="userlist #{if one.comment then "" else "nocomment"}">
-              <a href="http://delicious.com/#{one.username}/"><img width="16" height="16" title="#{one.username}" alt="#{one.username}" src="#{url_icon}"></a>
+              <a href="http://delicious.com/#{one.username}/"><img width="16" height="16" title="#{one.username}" alt="#{one.username}" src="#{urlIcon}"></a>
               <a class="username" href="http://delicious.com/#{one.username}/">#{one.username}</a>
               <span class="comment">#{one.comment}</span>
               <span class="timestamp">#{one.timestamp.replace(/(.+)T.+/, '$1')}</span>
             </li>
           """
-          html_line.replace /^\s+|\n\s+/, ''
-          html_line.replace /\n/, ''
+          htmlLine.replace /^\s+|\n\s+/, ''
+          htmlLine.replace /\n/, ''
         .join('')
-    $('#comment-list').html html_comments
+    $('#comment-list').html htmlComments
     $('a').attr 'target', '_blank'
     if comments.length >= TRESHOLD_HIDE_NOCOMMENT
       $('.nocomment').hide()
