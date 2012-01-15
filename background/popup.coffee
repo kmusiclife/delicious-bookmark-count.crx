@@ -5,7 +5,7 @@ c = (x) -> console.log x
 get_recent = (url) ->
   d = new Deferred
   $.get("http://feeds.delicious.com/v2/json/url/#{hex_md5 url}")
-  .next (data) ->
+  .next (comments) ->
     key_map =
       a:  'username'
       n:  'comment'
@@ -13,10 +13,10 @@ get_recent = (url) ->
       dt: 'timestamp'
 
     fixed =
-      data.map (one) ->
+      comments.map (one) ->
         for key of one
-          if key_map[key]?
-            one[key_map[key]] = one[key]
+          if key_map.hasOwnProperty key
+            one[key_map[key]] = one[key] ? ""
           delete one[key]
         one
       .filter (one) ->
@@ -26,7 +26,7 @@ get_recent = (url) ->
 
 get_bookmark_count = (url) ->
   $.get("http://feeds.delicious.com/v2/json/urlinfo/#{hex_md5 url}")
-  .next (data) -> data?.total_posts || 0
+  .next (comments) -> comments?.total_posts || 0
 
 $ ->
   Deferred.next ->
@@ -37,12 +37,12 @@ $ ->
   .next (url) ->
     get_recent(url)
 
-  .next (data) ->
+  .next (comments) ->
     html_comments =
-      if data.length is 0
+      if comments.length is 0
         'No comments.'
       else
-        data.map (one) ->
+        comments.map (one) ->
           url_icon = do ->
             username = if one.username.match /\./ then 'kawango' else one.username
             "http://cdn0.www.st-hatena.com/users/#{username.substr(0, 2)}/#{username}/profile_s.gif"
@@ -60,5 +60,5 @@ $ ->
         .join('')
     $('#comment-list').html html_comments
     $('a').attr 'target', '_blank'
-    if data.length >= TRESHOLD_HIDE_NOCOMMENT
+    if comments.length >= TRESHOLD_HIDE_NOCOMMENT
       $('.nocomment').hide()

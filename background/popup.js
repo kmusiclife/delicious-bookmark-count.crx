@@ -7,7 +7,7 @@ c = function(x) {
 get_recent = function(url) {
   var d;
   d = new Deferred;
-  $.get("http://feeds.delicious.com/v2/json/url/" + (hex_md5(url))).next(function(data) {
+  $.get("http://feeds.delicious.com/v2/json/url/" + (hex_md5(url))).next(function(comments) {
     var fixed, key_map;
     key_map = {
       a: 'username',
@@ -15,11 +15,11 @@ get_recent = function(url) {
       t: 'tags',
       dt: 'timestamp'
     };
-    fixed = data.map(function(one) {
-      var key;
+    fixed = comments.map(function(one) {
+      var key, _ref;
       for (key in one) {
-        if (key_map[key] != null) {
-          one[key_map[key]] = one[key];
+        if (key_map.hasOwnProperty(key)) {
+          one[key_map[key]] = (_ref = one[key]) != null ? _ref : "";
         }
         delete one[key];
       }
@@ -32,8 +32,8 @@ get_recent = function(url) {
   return d;
 };
 get_bookmark_count = function(url) {
-  return $.get("http://feeds.delicious.com/v2/json/urlinfo/" + (hex_md5(url))).next(function(data) {
-    return (data != null ? data.total_posts : void 0) || 0;
+  return $.get("http://feeds.delicious.com/v2/json/urlinfo/" + (hex_md5(url))).next(function(comments) {
+    return (comments != null ? comments.total_posts : void 0) || 0;
   });
 };
 $(function() {
@@ -46,9 +46,9 @@ $(function() {
     return d;
   }).next(function(url) {
     return get_recent(url);
-  }).next(function(data) {
+  }).next(function(comments) {
     var html_comments;
-    html_comments = data.length === 0 ? 'No comments.' : data.map(function(one) {
+    html_comments = comments.length === 0 ? 'No comments.' : comments.map(function(one) {
       var html_line, url_icon;
       url_icon = (function() {
         var username;
@@ -61,7 +61,7 @@ $(function() {
     }).join('');
     $('#comment-list').html(html_comments);
     $('a').attr('target', '_blank');
-    if (data.length >= TRESHOLD_HIDE_NOCOMMENT) {
+    if (comments.length >= TRESHOLD_HIDE_NOCOMMENT) {
       return $('.nocomment').hide();
     }
   });
