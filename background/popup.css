@@ -5,7 +5,7 @@
   font-size: small; }
 
 body {
-  width: 250px;
+  width: 500px;
   overflow-x: hidden;
   color: #222;
   min-height: 70px; }
@@ -67,9 +67,6 @@ span.timestamp {
   font-size: 85%;
   color: #999;
   margin: 4px; }
-
-a.username {
-  margin-left: 4px; }
 
 #comment-message {
   display: block;
