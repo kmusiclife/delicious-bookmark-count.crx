@@ -1,18 +1,37 @@
 {
-   "name": "Delicious Comments",
-   "background_page": "background/background.html",
-   "description": "Show Delicious Comments",
-   "browser_action": {
-      "default_icon": "images/16.png",
-      "popup": "background/popup.html"
-   },
-   "images": {
-      "16":  "images/16.png",
-      "128": "images/128.png"
-   },
-   "version": "0.1",
-  "permissions": [
-    "tabs",
-    "http://*.delicious.com/*"
-  ]
+    "name": "Delicious Comments",
+    "background_page": "background/background.html",
+    "description": "Show Delicious Comments",
+    "browser_action": {
+        "default_icon": "images/16.png",
+        "popup": "background/popup.html"
+    },
+    "images": {
+        "16":  "images/16.png",
+        "128": "images/128.png"
+    },
+    "version": "0.1",
+    "content_scripts": [
+      {
+        "run_at": "document_end",
+        "all_frames": false,
+        "js": [
+            "content/bookmark_count_embedder.js"
+        ],
+        "css": [
+            "content/bookmark_count_embedder.css"
+        ],
+        "matches": [
+            "http://*/*",
+            "https://*/*"
+        ]
+      }
+    ],
+    "permissions": [
+      "tabs",
+      "http://feeds.delicious.com/*",
+      "http://wedata.net/databases/*",
+      "http://b.st-hatena.com/*"
+
+    ]
 }

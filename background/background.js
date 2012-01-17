@@ -11,6 +11,25 @@ HTTPCache.counter = new HTTPCache('counterCache', {
     return data != null ? (_ref = data[0]) != null ? _ref.total_posts : void 0 : void 0;
   }
 });
+SiteinfoManager.addSiteinfos({
+  data: [
+    {
+      domain: '^http://www\\.google(?:\\.\\w+){1,2}/search\\?',
+      paragraph: 'descendant::div[@id = "res"]/div/div/ol/li[contains(concat(" ", @class, " "), " g ")]',
+      link: 'descendant::a[contains(concat(" ", @class, " "), " l ")]',
+      annotation: 'descendant::span[contains(concat(" ", @class, " "), " gl ")]',
+      annotationPosition: 'after'
+    }, {
+      domain: '^http://b\\.hatena\\.ne\\.jp/',
+      disable: true
+    }
+  ]
+});
+SiteinfoManager.addSiteinfos({
+  urls: ['http://wedata.net/databases/LDRize/items.json', 'http://b.st-hatena.com/file/LDRize.items.json'],
+  converter: SiteinfoManager.LDRizeConverter,
+  key: 'LDRizeSiteinfo'
+});
 Manager = {
   updateTab: function(tabId) {
     return chrome.tabs.get(tabId, __bind(function(tab) {
