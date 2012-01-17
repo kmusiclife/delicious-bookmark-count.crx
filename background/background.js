@@ -80,10 +80,22 @@ Manager = {
         color: [99, 99, 99, 255]
       });
     }
+  },
+  updateCurrentTab: function() {
+    return chrome.tabs.getSelected(null, function(t) {
+      return chrome.windows.getCurrent(function(w) {
+        if (t && w && w.id === t.windowId) {
+          return Manager.updateTab(t.id);
+        }
+      });
+    });
   }
 };
 chrome.tabs.onUpdated.addListener(function(tabId, opt) {
   if (opt.status === 'loading') {
     return Manager.updateTab(tabId);
   }
+});
+chrome.tabs.onSelectionChanged.addListener(function(tabId) {
+  return Manager.updateCurrentTab();
 });

@@ -53,8 +53,17 @@ Manager =
     else
       chrome.browserAction.setBadgeText                  tabId: tab.id, text: ''
       chrome.browserAction.setBadgeBackgroundColor       tabId: tab.id, color: [99,99,99, 255]
+  updateCurrentTab: ->
+    chrome.tabs.getSelected null, (t) ->
+      chrome.windows.getCurrent (w) ->
+        if t && w && w.id == t.windowId
+          Manager.updateTab t.id
 
 chrome.tabs.onUpdated.addListener (tabId, opt) ->
   if opt.status is 'loading'
-    Manager.updateTab(tabId)
+    Manager.updateTab tabId
+
+chrome.tabs.onSelectionChanged.addListener (tabId) ->
+  Manager.updateCurrentTab()
+
 
