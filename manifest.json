@@ -16,6 +16,7 @@
         "run_at": "document_end",
         "all_frames": false,
         "js": [
+            "lib/SiteinfoRequestor.js",
             "content/bookmark_count_embedder.js"
         ],
         "css": [
