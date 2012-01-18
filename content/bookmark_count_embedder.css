@@ -1,0 +1,15 @@
+a.delicious-bookmark-count:link, a.delicious-bookmark-count:hover, a.delicious-bookmark-count:visited {
+  color: #407ACC;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font: 95%/1.4 "Arial", "Helvetica", sans-serif;
+  text-decoration: underline; }
+em a.delicious-bookmark-count {
+  color: #407AD1 !important;
+  font-weight: bold !important;
+  background: #E4EFFA; }
+strong a.delicious-bookmark-count {
+  color: blue !important;
+  font-weight: bold !important;
+  background: #ABF4F3; }

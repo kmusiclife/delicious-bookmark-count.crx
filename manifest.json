@@ -16,7 +16,10 @@
         "run_at": "document_end",
         "all_frames": false,
         "js": [
+            "lib/md5.js",
+            "lib/jsdeferred.js",
             "lib/SiteinfoRequestor.js",
+            "content/util.js",
             "content/bookmark_count_embedder.js"
         ],
         "css": [

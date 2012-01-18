@@ -1,4 +1,4 @@
-var TRESHOLD_HIDE_NOCOMMENT, c, getBookmarkCount, getRecent;
+var TRESHOLD_HIDE_NOCOMMENT, c, getRecent;
 TRESHOLD_HIDE_NOCOMMENT = 15;
 Deferred.debug = true;
 c = function(x) {
@@ -30,11 +30,6 @@ getRecent = function(url) {
     return d.call(fixed);
   });
   return d;
-};
-getBookmarkCount = function(url) {
-  return $.get("http://feeds.delicious.com/v2/json/urlinfo/" + (hex_md5(url))).next(function(comments) {
-    return (comments != null ? comments.total_posts : void 0) || 0;
-  });
 };
 $(function() {
   return Deferred.chrome.tabs.getSelected(null).next(function(tab) {

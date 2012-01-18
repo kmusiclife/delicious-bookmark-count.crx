@@ -32,6 +32,16 @@ SiteinfoManager.addSiteinfos
     converter: SiteinfoManager.LDRizeConverter
     key: 'LDRizeSiteinfo'
 
+ConnectMessenger = $ {}
+
+ConnectMessenger.bind "get_siteinfo_for_url",     (event, data, port) ->
+  console.log('got request of siteinfo for ' + data.url)
+  SiteinfoManager.sendSiteinfoForURL data.url, port
+
+ConnectMessenger.bind "get_siteinfos_with_xpath", (event, data, port) ->
+  console.log('got request of siteinfos whose domain is XPath')
+  SiteinfoManager.sendSiteinfosWithXPath port
+
 Manager =
   updateTab: (tabId) ->
     chrome.tabs.get tabId, (tab) =>
@@ -66,4 +76,7 @@ chrome.tabs.onUpdated.addListener (tabId, opt) ->
 chrome.tabs.onSelectionChanged.addListener (tabId) ->
   Manager.updateCurrentTab()
 
-
+chrome.self.onConnect.addListener (port, name) ->
+  port.onMessage.addListener (info, con) ->
+    if info.message
+      ConnectMessenger.trigger info.message, [info.data, con]

@@ -24,10 +24,6 @@ getRecent = (url) ->
     d.call fixed
   d
 
-getBookmarkCount = (url) ->
-  $.get("http://feeds.delicious.com/v2/json/urlinfo/#{hex_md5 url}")
-  .next (comments) -> comments?.total_posts || 0
-
 $ ->
   Deferred.chrome.tabs.getSelected(null)
   .next (tab) ->

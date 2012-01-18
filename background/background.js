@@ -1,4 +1,4 @@
-var Manager;
+var ConnectMessenger, Manager;
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 HTTPCache.counter = new HTTPCache('counterCache', {
   expire: 60 * 15,
@@ -29,6 +29,15 @@ SiteinfoManager.addSiteinfos({
   urls: ['http://wedata.net/databases/LDRize/items.json', 'http://b.st-hatena.com/file/LDRize.items.json'],
   converter: SiteinfoManager.LDRizeConverter,
   key: 'LDRizeSiteinfo'
+});
+ConnectMessenger = $({});
+ConnectMessenger.bind("get_siteinfo_for_url", function(event, data, port) {
+  console.log('got request of siteinfo for ' + data.url);
+  return SiteinfoManager.sendSiteinfoForURL(data.url, port);
+});
+ConnectMessenger.bind("get_siteinfos_with_xpath", function(event, data, port) {
+  console.log('got request of siteinfos whose domain is XPath');
+  return SiteinfoManager.sendSiteinfosWithXPath(port);
 });
 Manager = {
   updateTab: function(tabId) {
@@ -98,4 +107,11 @@ chrome.tabs.onUpdated.addListener(function(tabId, opt) {
 });
 chrome.tabs.onSelectionChanged.addListener(function(tabId) {
   return Manager.updateCurrentTab();
+});
+chrome.self.onConnect.addListener(function(port, name) {
+  return port.onMessage.addListener(function(info, con) {
+    if (info.message) {
+      return ConnectMessenger.trigger(info.message, [info.data, con]);
+    }
+  });
 });
