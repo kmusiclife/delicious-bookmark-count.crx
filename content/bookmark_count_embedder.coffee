@@ -119,7 +119,6 @@ extend WidgetEmbedder::,
     .next (count) ->
       widgets = document.createDocumentFragment()
       widgets.appendChild document.createTextNode(' ')
-      div = E 'div'
       _link = E 'a',
         href: getEntryURL url
         class: 'delicious-bookmark-count'
