@@ -12,7 +12,7 @@ SiteinfoManager.addSiteinfos
     data: [
       # Google Web Search
       {
-        domain:     '^http://www\\.google(?:\\.\\w+){1,2}/search\\?'
+        domain:     '^https?://www\\.google(?:\\.\\w+){1,2}/search\\?'
         paragraph:  'descendant::div[@id = "res"]/div/div/ol/li[contains(concat(" ", @class, " "), " g ")]'
         link:       'descendant::a[contains(concat(" ", @class, " "), " l ")]'
         annotation: 'descendant::span[contains(concat(" ", @class, " "), " gl ")]'
