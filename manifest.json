@@ -1,5 +1,5 @@
 {
-    "name": "Delicious Total Bookmark Count Viewer",
+    "name": "Delicious Bookmark Viewer",
     "background_page": "background/background.html",
     "description": "Show Delicious bookmark counts comments and on an arbitrary page.",
     "browser_action": {
@@ -12,7 +12,7 @@
         "48":  "images/48.png",
         "128": "images/128.png"
     },
-    "version": "0.0.1",
+    "version": "0.0.3",
     "update_url": "http://clients2.google.com/service/update2/crx",
     "content_scripts": [
       {
