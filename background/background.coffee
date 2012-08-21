@@ -47,7 +47,10 @@ Manager =
     chrome.tabs.get tabId, (tab) =>
       @updateBookmarkCounter tab
   updateBookmarkCounter: (tab) ->
-    if tab and tab.url?.indexOf 'http' == 0
+    if      tab and tab.url?.indexOf 'https' == 0
+      chrome.browserAction.setBadgeText                  tabId: tab.id, text: '-'
+      chrome.browserAction.setBadgeBackgroundColor       tabId: tab.id, color: [99,99,99, 255]
+    else if tab and tab.url?.indexOf 'http'  == 0
       HTTPCache.counter.get(tab.url)
       .next (count) ->
         switch count
