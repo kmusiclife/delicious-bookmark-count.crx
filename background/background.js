@@ -55,7 +55,7 @@ Manager = {
   },
   updateBookmarkCounter: function(tab) {
     var _ref, _ref1;
-    if (tab && ((_ref = tab.url) != null ? _ref.indexOf('https' === 0) : void 0)) {
+    if ((tab != null ? (_ref = tab.url) != null ? _ref.indexOf('https') : void 0 : void 0) === 0) {
       chrome.browserAction.setBadgeText({
         tabId: tab.id,
         text: '-'
@@ -64,7 +64,7 @@ Manager = {
         tabId: tab.id,
         color: [99, 99, 99, 255]
       });
-    } else if (tab && ((_ref1 = tab.url) != null ? _ref1.indexOf('http' === 0) : void 0)) {
+    } else if ((tab != null ? (_ref1 = tab.url) != null ? _ref1.indexOf('http') : void 0 : void 0) === 0) {
       return HTTPCache.counter.get(tab.url).next(function(count) {
         switch (count) {
           case null:

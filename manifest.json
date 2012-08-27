@@ -12,7 +12,7 @@
         "48":  "images/48.png",
         "128": "images/128.png"
     },
-    "version": "0.0.4",
+    "version": "0.0.5",
     "update_url": "http://clients2.google.com/service/update2/crx",
     "content_scripts": [
       {
